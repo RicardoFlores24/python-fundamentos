@@ -1,0 +1,54 @@
+class Persona:
+    def __init__(self, primer_nombre, apellido):
+        self.primer_nombre = primer_nombre
+        self.apellido = apellido
+
+class Cliente(Persona):
+    def __init__(self, primer_nombre, apellido, cuentab, balance = 0):
+        super().__init__(primer_nombre, apellido)
+        self.cuentab = cuentab
+        self.balance = balance
+
+    def __str__(self):
+        return f'Cliente: {self.primer_nombre} {self.apellido}\nCuenta Bancaria  {self.cuentab}: ${self.balance}'
+
+    def deposito(self, cantidad_deposito):
+        self.balance += cantidad_deposito
+    print("Deposito aceptado")
+
+    def retiro(self, cantidad_retiro):
+        if self.balance >= cantidad_retiro:
+            self.balance -= cantidad_retiro
+            print('Retiro hecho')
+        else:
+            print('insuficientes fondos')
+
+def crear_cliente():
+    primer_nombre_ct = input('Digite su nombre: ')
+    apellido_ct = input('Digite su apellido? ')
+    numero_de_cuenta = input("Digite su numero de cuenta: ")
+    cliente1 = Cliente(primer_nombre_ct, apellido_ct, numero_de_cuenta)
+
+    return cliente1
+
+
+def inicio():
+    customer = crear_cliente()
+    print(customer)
+    option = 0
+
+    while option != 'E':
+        print("Elige: Deposito (D), retiro (R), o Salir (X)")
+        Option = input()
+
+        if option == 'D':
+            ret_cantidad = int(input("Cantidad a depositar: "))
+            customer.deposito(ret_cantidad)
+        elif option == 'R':
+            cantidadr = int(input("Cantidad a retirar: "))
+            customer.retiro(cantidadr)
+
+        print(customer)
+
+        print("Gracias por usar nuestro banco")
+inicio()
